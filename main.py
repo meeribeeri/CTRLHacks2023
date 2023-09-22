@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import * 
 import include.card
+from include.cardtypes import *
 from include.player import Player
 
 

@@ -1,7 +1,11 @@
-from tkinter import ttk
-from cardtypes import *
 from random import randint
-from random import random
+
+from enum import Enum
+
+class MathType(Enum):
+    OPERATOR = 0
+    EXPONENT = 1
+    VALUE = 2
 
 class Card():
     def __init__(self):
@@ -11,8 +15,8 @@ class Card():
         pass
 
 class MathCard(Card):
-    def __init__(self,type : MathType):
-        self.type = type
+    def __init__(self,cardtype : MathType):
+        self.type = cardtype
         self.value = ""
         self.num = 0
         self.complexity = 1
