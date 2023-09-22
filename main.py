@@ -18,6 +18,7 @@ async def synchronise(ctx):
     print("synchronising")
     await ctx.send("Synchonising...")
     await client.tree.sync(guild=guild)
+    client.tree.copy_global_to(guild=guild)
     await ctx.send("Commands synchonised!")
     print("synced")
 
