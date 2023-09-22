@@ -1,4 +1,5 @@
 from random import randint
+from random import random
 
 from enum import Enum
 
@@ -11,7 +12,7 @@ class Card():
     def __init__(self):
         pass
 
-    def use(self):
+    def play(self):
         pass
 
 class MathCard(Card):
@@ -41,3 +42,7 @@ class MathCard(Card):
                 self.value = "^"
                 self.num = randint(2,4)
                 self.complexity+=2
+            case MathType.VALUE:
+                self.value = "++"
+                self.num = random()
+                self.complexity+=1
