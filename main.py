@@ -1,5 +1,6 @@
-import tkinter
+from tkinter import ttk
 import include.card
+from include.player import Player
 
 def main():
     pass

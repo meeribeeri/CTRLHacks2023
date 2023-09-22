@@ -1,4 +1,4 @@
-import tkinter
+from tkinter import ttk
 
 class Card():
     def __init__(self):
