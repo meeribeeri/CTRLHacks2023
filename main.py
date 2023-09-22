@@ -9,7 +9,7 @@ Win = Tk()
 
 Win.title('Card Learning Game') #self explanitory
 
-Win.geometry('500x500') #Size of the window
+Win.geometry('1200x800') #Size of the window
 Win.resizable(False, False) #Window is not resizable
 Win.iconbitmap('') #Window Icon
 

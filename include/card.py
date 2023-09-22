@@ -7,6 +7,7 @@ class MathType(Enum):
     OPERATOR = 0
     EXPONENT = 1
     VALUE = 2
+    ABS = 3
 
 class Card():
     def __init__(self):
@@ -46,3 +47,7 @@ class MathCard(Card):
                 self.value = "++"
                 self.num = random()
                 self.complexity+=1
+            case MathType.ABS:
+                self.value = "||"
+                self.num = 0
+                self.complexity = 1
