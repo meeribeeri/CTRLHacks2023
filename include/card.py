@@ -25,15 +25,21 @@ class SocialType(Enum):
     ENLIGHT = 4
     US_CIVIL = 5
 
+class ELAType(Enum):
+    R_AND_J = 0
+    MACBETH = 1
+
 class Card():
-    def __init__(self):
-        pass
+    def __init__(self,image = None,text : str = ""):
+        self.image = image
+        self.text = text
 
     def play(self):
         pass
 
 class SSCard(Card):
     def __init__(self,enemy,user,cardtype : SocialType):
+        super.__init__(text="SS")
         self.type = cardtype
         self.enemy = enemy #Player's damage function
         self.user = user #user damage function
@@ -49,7 +55,38 @@ class SSCard(Card):
                 self.options.append("Voltaire")
                 self.options.append("Thomas Hobbes")
                 self.options.append("Jean Jaques Rousseau")
-                self.answer = self.options[0]
+        self.answer = self.options[0] #always put first option as correct, they are scambled anyway
+
+    def onAnswer(self,correct : bool):
+        if correct:
+            self.enemy(5*self.difficulty)
+        else:
+            self.user(int(2.5*self.difficulty))
+        del self.mc_question
+
+    def play(self,window : Tk):
+        shuffle(self.options)
+        self.mc_question = mc.multiple_choice(self.onAnswer,self.options,self.options.index(self.answer),self.question,window)
+
+class ELACard(Card): #Same as social, just placing it as a diff class for organization
+    def __init__(self,enemy,user,cardtype : ELAType):
+        super.__init__(text="ELA")
+        self.type = cardtype
+        self.enemy = enemy #Player's damage function
+        self.user = user #user damage function
+        self.difficulty = 1 #difficulty of the question
+        self.question = "" #question asked
+        self.options = [] #all possible options(4 total)
+        self.answer = "" #Copy of correct answer, so that options can be scrambled, yes this can cause issues if they dont match... so hope that doesn't occur!
+        match self.type:
+            case ELAType.R_AND_J:
+                #temp only 1 option
+                self.question = "Who says, \"A curse on both your houses!\"?"
+                self.options.append("Mercutio")
+                self.options.append("Tybalt")
+                self.options.append("Romeo")
+                self.options.append("Benvolio")
+        self.answer = self.options[0]
 
     def onAnswer(self,correct : bool):
         if correct:
@@ -65,6 +102,7 @@ class SSCard(Card):
 
 class MathCard(Card):
     def __init__(self,cardtype : MathType):
+        super.__init__(text="Math")
         self.type = cardtype
         self.value = ""
         self.num = 0
