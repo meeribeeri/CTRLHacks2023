@@ -1,13 +1,16 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import * 
+from tkinter.ttk import *
 import include.card
 from include.player import Player
+from include.mc import *
 
 
 Win = Tk()
 
 Win.title('Card Learning Game') #self explanitory
+
 
 Win.geometry('1200x800') #Size of the window
 Win.resizable(False, False) #Window is not resizable
@@ -17,7 +20,8 @@ Ma=Menubutton(Win,text = 'Math') #This is the button for math!
 #add anything you need in here such as shape,geometry,mesh,etc
 Ma.grid(column=0, row=0)#instead of using x,y coordinates i opted for colums and rows!
 
-
+test = multiple_choice([],1,"TEST",Win)
+""""
 Sci=Menubutton(Win,text = 'Science')
 Sci.grid(column=1, row=0)
 
@@ -35,7 +39,9 @@ Mul2 = Radiobutton(Win,text='65', value=2)
 Mul2.grid(column=1, row=3)
 
 Mul3 = Radiobutton(Win,text='87', value=3)
-Mul3.grid(column=2, row=3)
+Mul3.grid(column=2, row=3)"""
+
+
 
 def clicked():
 
