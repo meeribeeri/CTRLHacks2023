@@ -12,3 +12,6 @@ class Player():
                 cardDrawn = deck.pop(randint(0,len(deck)-1))
                 self.discard.append(cardDrawn)
                 self.hand.append(cardDrawn)
+
+    def damage(self, damage_taken : int):
+        self.hp-=damage_taken
