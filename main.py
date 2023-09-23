@@ -18,9 +18,9 @@ Win.iconbitmap('') #Window Icon
 
 Ma=Menubutton(Win,text = 'Math') #This is the button for math!
 #add anything you need in here such as shape,geometry,mesh,etc
-Ma.grid(column=0, row=0)#instead of using x,y coordinates i opted for colums and rows!
+#Ma.grid(column=0, row=0)#instead of using x,y coordinates i opted for colums and rows!
 
-test = multiple_choice([],1,"TEST",Win)
+test = multiple_choice(["H","L","D","F"],1,"TEST",Win)
 """"
 Sci=Menubutton(Win,text = 'Science')
 Sci.grid(column=1, row=0)
@@ -48,10 +48,10 @@ def clicked():
     print #(.get())
 
 Butn = Radiobutton(Win, text="Click Me", command=clicked)
-Butn.grid(column=3, row=3)
+#Butn.grid(column=3, row=3)
 
 SB = Spinbox(Win, from_=0, to=1000, width=10) # you can figure out h what this should do
-SB.grid(column=0,row=5)
+#SB.grid(column=0,row=5)
 
 Win.mainloop() #self explanitory
 
