@@ -8,6 +8,7 @@ from tkinter.ttk import *
 
 from include.player import Player
 from . import mc
+from PIL import ImageTk, Image
 
 from enum import Enum
 
@@ -32,8 +33,9 @@ class ELAType(Enum):
 class Card():
     def __init__(self,image = None,text : str = ""):
         if image != None:
-            self.image_ref = image
-            self.image = PhotoImage(file=image)
+            self.image_ref = Image.open(image)
+            self.image_ref.resize((25,50),Image.ANTIALIAS)
+            self.image = ImageTk.PhotoImage(self.image_ref)
         else:
             self.image = image
         self.text = text

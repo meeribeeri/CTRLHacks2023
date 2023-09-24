@@ -100,3 +100,10 @@ class Player():
             self.frame_components[i*2+1].grid(row=2,column=i+1,sticky=N)
         self.frame_components.append(Button(master=self.frame,text="Play Cards",command=self.endCardChoice))
         self.frame_components[10].grid(row=3,column=0,columnspan=6,sticky=N)
+
+    def delete(self):
+        for child in self.frame.winfo_children():
+            child.destroy()
+
+        self.frame.destroy()
+

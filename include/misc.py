@@ -23,7 +23,7 @@ class Question_Box():
         self.frame['relief'] = 'sunken'
         self.frame.grid_rowconfigure(0, weight=1)
         self.frame.grid_columnconfigure(0, weight=1)
-        self.frame.grid(row=1,column=1,columnspan=6,rowspan=7,sticky=N)
+        self.frame.grid(row=1,column=0,columnspan=6,rowspan=7,sticky=N)
         self.questions = []
 
         self.title = Label(master=self.frame,text="Answer All Questions")
@@ -73,16 +73,11 @@ class Question_Box():
 
         for player in self.targets:
             if player.hp <= 0:
-                endFrame = Frame(self.master)
-                endFrame.grid_rowconfigure(0, weight=1)
-                endFrame.grid_columnconfigure(0, weight=1)
-                endFrame.grid(row=1,column=1,columnspan=6,rowspan=7,sticky=N)
-                endLabel = Label(master=endFrame,text=f"Player {self.targets.index(player)} wins!")
-                endLabel.grid(row=0,column=0,columnspan=6,sticky=N)
-                endButton = Button(master=endFrame,text="Restart?",command=self.endPressed)
-                endButton.grid(row=1,column=0,columnspan=6,sticky=N)
+                self.master.quit()
                 
         
-    def endPressed(self):
-        self.restart = True
+    def delete(self):
+        for child in self.frame.winfo_children():
+            child.destroy()
+        self.frame.destroy()
 
