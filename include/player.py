@@ -4,8 +4,9 @@ from tkinter import ttk
 from tkinter import * 
 from tkinter.ttk import *
 
+
 class Player():
-    def __init__(self,deck : list, window : Tk = None,question_area : Frame = None):
+    def __init__(self,question_area,deck : list, window : Tk = None):
         self.deck = deck
         self.hand = []
         self.discard = []
@@ -48,13 +49,14 @@ class Player():
                 self.discard = []
             cardDrawn = self.deck.pop(randint(0,len(self.deck)-1))
             self.hand.append(cardDrawn)
+
     def play(self,card_index,rowsdown : int):
         try:
             card_used = self.hand.pop(card_index)
         except:
             card_used = self.hand.pop()
         self.discard.append(card_used)
-        card_used.play(self.question_area,rowsdown)
+        self.question_area.addQuestion(card_used,rowsdown)
 
     def turnStart(self):
         self.frame.grid(column=0,row=8,columnspan=6,rowspan=3,sticky=N)
@@ -68,4 +70,5 @@ class Player():
             match self.cards_to_play[i].get():
                 case True:
                     self.play(card_index=i,rowsdown=i)
+        self.draw()
         

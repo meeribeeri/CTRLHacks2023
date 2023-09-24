@@ -31,8 +31,13 @@ class ELAType(Enum):
 
 class Card():
     def __init__(self,image = None,text : str = ""):
-        self.image = image
+        if image != None:
+            self.image_ref = image
+            self.image = PhotoImage(file=image)
+        else:
+            self.image = image
         self.text = text
+        self.difficulty = 0
 
     def play(self):
         pass
@@ -88,7 +93,7 @@ class MathCard(Card):
         self.type = cardtype
         self.value = ""
         self.num = 0
-        self.complexity = 1
+        self.difficulty = 1
         match self.type:
             case MathType.OPERATOR:
                 match randint(1,4):
@@ -101,20 +106,20 @@ class MathCard(Card):
                     case 3:
                         self.value = "*"
                         self.num = randint(2,10)
-                        self.complexity+=1
+                        self.difficulty+=1
                     case _:
                         self.value = "/"
                         self.num = randint(2,10)
-                        self.complexity+=1
+                        self.difficulty+=1
             case MathType.EXPONENT:
                 self.value = "^"
                 self.num = randint(2,4)
-                self.complexity+=2
+                self.difficulty+=2
             case MathType.VALUE:
                 self.value = "++"
                 self.num = random()
-                self.complexity+=1
+                self.difficulty+=1
             case MathType.ABS:
                 self.value = "||"
                 self.num = 0
-                self.complexity = 1
+                self.difficulty = 1

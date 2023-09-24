@@ -33,8 +33,9 @@ def main():
     deck = []
     for i in range(0,40):
         deck.append(cards.SSCard(cards.SocialType.ENLIGHT))
-    testPlayer = Player(deck=deck,window=Win,question_area=questionframe.frame)
-    testPlayer.turnStart()
+    Player_1 = Player(deck=deck,window=Win,question_area=questionframe)
+    Player_2 = Player(deck=deck,window=Win,question_area=questionframe)
+    Player_1.turnStart()
 
     """"
     Sci=Menubutton(Win,text = 'Science')
