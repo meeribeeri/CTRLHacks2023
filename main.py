@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import * 
 from tkinter.ttk import *
 import include.card as cards
-from include.menu import TopBar
+from include.menu import *
 from include.player import Player
 from include.mc import *
 from include.misc import *
@@ -16,13 +16,13 @@ def main():
         Win = Tk()
 
         Win.title('Card Learning Game') #self explanitory
-
-
         Win.geometry('1200x800') #Size of the window
         Win.resizable(False, False) #Window is not resizable
         Win.iconbitmap('') #Window Icon
         Win.grid_rowconfigure(0, weight=1)
         Win.grid_columnconfigure(0, weight=1)
+
+        winner = None
         
         top_bar = TopBar(Win)
 
@@ -40,11 +40,23 @@ def main():
         
         Win.mainloop() #self explanitory
     #anything below here won't run, at least within the function
+        if Player_1.hp <= 0:
+            winner = 2
+        else:
+            winner = 1
         Player_1.delete()
         Player_2.delete()
         question_frame.delete()
+        #deleting objs, probs unecessary
+        del Player_1
+        del Player_2
+        del question_frame
+
+        end = EndScreen(master=Win,winner=winner)
+
         Win.mainloop()
-        break
+        end.delete()
+        del end
         
 
 if __name__ == "__main__":

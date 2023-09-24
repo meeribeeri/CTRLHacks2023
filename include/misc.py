@@ -31,7 +31,6 @@ class Question_Box():
 
         self.final_answer = Button(master=self.frame,text="Finish",command=self.finalize)
         self.final_answer.grid(row=7,column=0,columnspan=6,sticky=N)
-        self.restart = False
 
     def addQuestion(self,question : Card,rowsdown : int = 0):
         self.questions.append(question)
