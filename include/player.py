@@ -6,7 +6,7 @@ from tkinter.ttk import *
 
 
 class Player():
-    def __init__(self,question_area,deck : list, window : Tk = None, hp : int = 100, max_hp : int = 100):
+    def __init__(self,question_area,deck : list, window : Tk = None, hp : int = 5, max_hp : int = 100):
         self.deck = deck
         self.hand = []
         self.discard = []
@@ -67,6 +67,7 @@ class Player():
         self.frame.grid(column=0,row=8,columnspan=6,rowspan=3,sticky=N)
         for child in self.frame.winfo_children():
             child.configure(state='normal') #turns each component of frame on, so that users can see it
+
         
 
 

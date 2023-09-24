@@ -31,6 +31,7 @@ class Question_Box():
 
         self.final_answer = Button(master=self.frame,text="Finish",command=self.finalize)
         self.final_answer.grid(row=7,column=0,columnspan=6,sticky=N)
+        self.restart = False
 
     def addQuestion(self,question : Card,rowsdown : int = 0):
         self.questions.append(question)
@@ -69,4 +70,19 @@ class Question_Box():
                 self.retarget(1)
             case _:
                 self.retarget(0)
+
+        for player in self.targets:
+            if player.hp <= 0:
+                endFrame = Frame(self.master)
+                endFrame.grid_rowconfigure(0, weight=1)
+                endFrame.grid_columnconfigure(0, weight=1)
+                endFrame.grid(row=1,column=1,columnspan=6,rowspan=7,sticky=N)
+                endLabel = Label(master=endFrame,text=f"Player {self.targets.index(player)} wins!")
+                endLabel.grid(row=0,column=0,columnspan=6,sticky=N)
+                endButton = Button(master=endFrame,text="Restart?",command=self.endPressed)
+                endButton.grid(row=1,column=0,columnspan=6,sticky=N)
+                
+        
+    def endPressed(self):
+        self.restart = True
 
