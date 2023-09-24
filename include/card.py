@@ -9,14 +9,15 @@ from tkinter.ttk import *
 from include.player import Player
 from . import mc
 from PIL import ImageTk, Image
+from math import *
 
 from enum import Enum
 
 class MathType(Enum):
-    OPERATOR = 0
-    EXPONENT = 1
-    VALUE = 2
-    ABS = 3
+    QUADRATICS = 0
+    TRANSFORMATIONS = 1
+    PERMS_AND_COMBS = 2
+    RADICALS_AND_EXPONENTS = 3
 
 class SocialType(Enum):
     GLOBE_U1 = 0
@@ -93,35 +94,52 @@ class MathCard(Card):
     def __init__(self,cardtype : MathType):
         super.__init__(text="Math")
         self.type = cardtype
-        self.value = ""
-        self.num = 0
+        self.question
+        self.options = []
+        self.answer = ""
         self.difficulty = 1
         match self.type:
-            case MathType.OPERATOR:
-                match randint(1,4):
+            case MathType.QUADRATICS:
+                #base equation is either y = a(x-h)+k or y = ax^2 + bx + c
+                match randint(1,2):
                     case 1:
-                        self.value = "+"
-                        self.num = randint(1,50)
-                    case 2:
-                        self.value = "-"
-                        self.num = randint(1,50)
-                    case 3:
-                        self.value = "*"
-                        self.num = randint(2,10)
-                        self.difficulty+=1
-                    case _:
-                        self.value = "/"
-                        self.num = randint(2,10)
-                        self.difficulty+=1
-            case MathType.EXPONENT:
-                self.value = "^"
-                self.num = randint(2,4)
-                self.difficulty+=2
-            case MathType.VALUE:
-                self.value = "++"
-                self.num = random()
-                self.difficulty+=1
-            case MathType.ABS:
-                self.value = "||"
-                self.num = 0
-                self.difficulty = 1
+                        if randint(0,1) == 1:
+                            a = randint(1,5)
+                        else:
+                            a = randint(1,5) * -1
+                        h = randint(-30,30)
+                        k = randint(-30,30)
+
+                        if h >= 0:
+                            str_h = f"-{h}"
+                        else:
+                            str_h = f"+{h*-1}"
+
+                        if k >= 0:
+                            str_k = f"+{k}"
+                        else:
+                            str_k = f"-{k*-1}"
+                        match randint(1,3):
+                            case 1:
+                                #get y intercept
+                                self.question = f"What is the y-intercept of y = {a}((x{str_h})^2){str_k}?"
+                                self.options.append(str(a*pow((0-h),2)+k))
+                                self.options.append(str(a*pow((0-k),2)+h))
+                                self.options.append(str(a*pow((0+h),2)-k))
+                                self.options.append(str(a*pow((0+k),2)-h))
+                            case 2:
+                                #x ints
+                                self.question = f"What are the x-intercepts of y = {a}((x{str_h})^2){str_k}?"
+                                self.options.append(f"+/-{sqrt(abs((0-k)/a))}+{h}")
+                                self.options.append(f"+/-{sqrt(abs((0-h)/a))}+{k}")
+                                self.options.append(f"+/-{sqrt(abs((0-k)/-a))}+{h}")
+                                self.options.append(f"+/-{sqrt(abs((0+k)/a))}+{-h}")
+                            case 3:
+                                #vertex
+                                self.question = f"What is the vertex of y = {a}((x{str_h})^2){str_k}?"
+                                self.options.append(f"({-h},{k})")
+                                self.options.append(f"({-k},{h})")
+                                self.options.append(f"({h},{k})")
+                                self.options.append(f"({k},{h})")
+
+        self.answer = self.options[0]

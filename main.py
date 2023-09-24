@@ -8,19 +8,19 @@ from include.player import Player
 from include.mc import *
 from include.misc import *
 from PIL import ImageTk, Image
-
-
+from math import *
 
 def main():
-    while True:
-        Win = Tk()
+    Win = Tk()
 
-        Win.title('Card Learning Game') #self explanitory
-        Win.geometry('1200x800') #Size of the window
-        Win.resizable(False, False) #Window is not resizable
-        Win.iconbitmap('') #Window Icon
-        Win.grid_rowconfigure(0, weight=1)
-        Win.grid_columnconfigure(0, weight=1)
+    Win.title('Card Learning Game') #self explanitory
+    Win.geometry('1200x800') #Size of the window
+    Win.resizable(False, False) #Window is not resizable
+    Win.iconbitmap('') #Window Icon
+    Win.grid_rowconfigure(0, weight=1)
+    Win.grid_columnconfigure(0, weight=1)
+    while True:
+        
 
         winner = None
         
@@ -47,10 +47,12 @@ def main():
         Player_1.delete()
         Player_2.delete()
         question_frame.delete()
+        top_bar.delete()
         #deleting objs, probs unecessary
         del Player_1
         del Player_2
         del question_frame
+        del top_bar
 
         end = EndScreen(master=Win,winner=winner)
 

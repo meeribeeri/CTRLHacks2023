@@ -79,6 +79,7 @@ class Player():
                 case True:
                     self.play(card_index=i,rowsdown=i)
         self.draw()
+        self.question_area.activate()
 
     def turnEnd(self):
         self.cards_to_play = [BooleanVar(),BooleanVar(),BooleanVar(),BooleanVar(),BooleanVar()]

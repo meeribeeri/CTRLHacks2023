@@ -31,6 +31,7 @@ class Question_Box():
 
         self.final_answer = Button(master=self.frame,text="Finish",command=self.finalize)
         self.final_answer.grid(row=7,column=0,columnspan=6,sticky=N)
+        self.final_answer.configure(state="disable")
 
     def addQuestion(self,question : Card,rowsdown : int = 0):
         self.questions.append(question)
@@ -52,13 +53,6 @@ class Question_Box():
         
         self.questions = []
 
-
-        self.title = Label(master=self.frame,text="Answer All Questions")
-        self.title.grid(row=0,column=0,columnspan=6,sticky=N)
-
-        self.final_answer = Button(master=self.frame,text="Finish",command=self.finalize)
-        self.final_answer.grid(row=7,column=0,columnspan=6,sticky=N)
-
         self.targets[self.current_target].damage(damage)
         self.targets[self.current_target-1].damage(self_damage)
         self.targets[self.current_target-1].turnEnd()
@@ -79,4 +73,7 @@ class Question_Box():
         for child in self.frame.winfo_children():
             child.destroy()
         self.frame.destroy()
+
+    def activate(self):
+        self.final_answer.configure(state='normal')
 

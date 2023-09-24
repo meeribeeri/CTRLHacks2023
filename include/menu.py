@@ -18,6 +18,9 @@ class TopBar():
 
         self.title = Label(master=self.frame,text="Study Card Duels")
         self.title.grid(row=0,column=1,columnspan=6,sticky=N)
+    def delete(self):
+        self.title.destroy()
+        self.frame.destroy()
 
 
 class EndScreen():
@@ -45,8 +48,6 @@ class EndScreen():
         self.master.quit()
 
     def delete(self):
-        for child in self.frame.winfo_children():
-            child.destroy()
-
+        
         self.frame.destroy()
 
