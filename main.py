@@ -3,8 +3,10 @@ from tkinter import ttk
 from tkinter import * 
 from tkinter.ttk import *
 import include.card as cards
+from include.menu import TopBar
 from include.player import Player
 from include.mc import *
+from include.misc import *
 
 def main():
     Win = Tk()
@@ -23,8 +25,16 @@ def main():
     #Ma.grid(column=0, row=0)#instead of using x,y coordinates i opted for colums and rows!
     def damage(damage : int):
         print(damage, "K")
-    cardTest = cards.SSCard(damage,damage,cards.SocialType.ENLIGHT)
-    cardTest.play(Win)
+    
+    top_bar = TopBar(Win)
+
+    questionframe = Question_Box(Win)
+
+    deck = []
+    for i in range(0,40):
+        deck.append(cards.SSCard(cards.SocialType.ENLIGHT))
+    testPlayer = Player(deck=deck,window=Win,question_area=questionframe.frame)
+    testPlayer.turnStart()
 
     """"
     Sci=Menubutton(Win,text = 'Science')

@@ -38,11 +38,9 @@ class Card():
         pass
 
 class SSCard(Card):
-    def __init__(self,enemy,user,cardtype : SocialType):
-        super.__init__(text="SS")
+    def __init__(self,cardtype : SocialType):
+        super().__init__(text="SS")
         self.type = cardtype
-        self.enemy = enemy #Player's damage function
-        self.user = user #user damage function
         self.difficulty = 1 #difficulty of the question
         self.question = "" #question asked
         self.options = [] #all possible options(4 total)
@@ -57,23 +55,14 @@ class SSCard(Card):
                 self.options.append("Jean Jaques Rousseau")
         self.answer = self.options[0] #always put first option as correct, they are scambled anyway
 
-    def onAnswer(self,correct : bool):
-        if correct:
-            self.enemy(5*self.difficulty)
-        else:
-            self.user(int(2.5*self.difficulty))
-        del self.mc_question
-
-    def play(self,window : Tk):
+    def play(self,window : Frame,rowsdown : int):
         shuffle(self.options)
-        self.mc_question = mc.multiple_choice(self.onAnswer,self.options,self.options.index(self.answer),self.question,window)
+        self.mc_question = mc.multiple_choice(self.options,self.options.index(self.answer),self.question,window,rowsdown=rowsdown)
 
 class ELACard(Card): #Same as social, just placing it as a diff class for organization
-    def __init__(self,enemy,user,cardtype : ELAType):
+    def __init__(self,cardtype : ELAType):
         super.__init__(text="ELA")
         self.type = cardtype
-        self.enemy = enemy #Player's damage function
-        self.user = user #user damage function
         self.difficulty = 1 #difficulty of the question
         self.question = "" #question asked
         self.options = [] #all possible options(4 total)
@@ -88,16 +77,9 @@ class ELACard(Card): #Same as social, just placing it as a diff class for organi
                 self.options.append("Benvolio")
         self.answer = self.options[0]
 
-    def onAnswer(self,correct : bool):
-        if correct:
-            self.enemy(5*self.difficulty)
-        else:
-            self.user(int(2.5*self.difficulty))
-        del self.mc_question
-
-    def play(self,window : Tk):
+    def play(self,window : Frame,rowsdown : int):
         shuffle(self.options)
-        self.mc_question = mc.multiple_choice(self.onAnswer,self.options,self.options.index(self.answer),self.question,window)
+        self.mc_question = mc.multiple_choice(self.options,self.options.index(self.answer),self.question,master=window,rowsdown=rowsdown)
 
 
 class MathCard(Card):
