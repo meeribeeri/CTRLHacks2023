@@ -8,8 +8,12 @@ from include.player import Player
 from include.mc import *
 from include.misc import *
 
+
+
 def main():
     Win = Tk()
+    game_state = 0
+
 
     Win.title('Card Learning Game') #self explanitory
 
@@ -28,49 +32,20 @@ def main():
     
     top_bar = TopBar(Win)
 
-    questionframe = Question_Box(Win)
+    question_frame = Question_Box(Win)
 
     deck = []
     for i in range(0,40):
         deck.append(cards.SSCard(cards.SocialType.ENLIGHT))
-    Player_1 = Player(deck=deck,window=Win,question_area=questionframe)
-    Player_2 = Player(deck=deck,window=Win,question_area=questionframe)
+    Player_1 = Player(deck=deck,window=Win,question_area=question_frame)
+    Player_2 = Player(deck=deck,window=Win,question_area=question_frame)
+    question_frame.targets = [Player_1,Player_2]
+    question_frame.retarget(1)
     Player_1.turnStart()
-
-    """"
-    Sci=Menubutton(Win,text = 'Science')
-    Sci.grid(column=1, row=0)
-
-    SoSt=Menubutton(Win,text = 'SS')
-    SoSt.grid(column=2, row=0)
-
-    Eng=Menubutton(Win,text = 'English')
-    Eng.grid(column=3, row=0)
-
-
-    Mul1 = Radiobutton(Win,text='34', value=1) #These are what we will use for multiple choice answers.
-    Mul1.grid(column=0, row=3)
-
-    Mul2 = Radiobutton(Win,text='65', value=2)
-    Mul2.grid(column=1, row=3)
-
-    Mul3 = Radiobutton(Win,text='87', value=3)
-    Mul3.grid(column=2, row=3)"""
-
-
-
-    def clicked():
-
-        print #(.get())
-
-    Butn = Radiobutton(Win, text="Click Me", command=clicked)
-    #Butn.grid(column=3, row=3)
-
-    SB = Spinbox(Win, from_=0, to=1000, width=10) # you can figure out h what this should do
-    #SB.grid(column=0,row=5)
-
+    
+    print(game_state)
     Win.mainloop() #self explanitory
-
+#anything below here won't run, at least within the function
 
 if __name__ == "__main__":
     main()

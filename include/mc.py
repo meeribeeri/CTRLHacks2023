@@ -35,6 +35,9 @@ class multiple_choice():
         self.m2.grid(row=1,column=1,rowspan=1,columnspan=1,padx=2)
         self.m3.grid(row=1,column=2,rowspan=1,columnspan=1,padx=2)
         self.m4.grid(row=1,column=3,rowspan=1,columnspan=1,padx=2)
+    
+    def delete(self):
+        self.frame.destroy()
 
 
 
