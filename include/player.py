@@ -8,7 +8,7 @@ from PIL import ImageTk, Image
 
 
 class Player():
-    def __init__(self,question_area,player_num : int = 1,deck : list = None, window : Tk = None, hp : int = 5, max_hp : int = 100,label_column :int = 0):
+    def __init__(self,question_area,player_num : int = 1,deck : list = None, window : Tk = None, hp : int = 100, max_hp : int = 100,label_column :int = 0):
         self.deck = deck
         self.hand = []
         self.discard = []
@@ -70,7 +70,7 @@ class Player():
             
     def damage(self,damage : int):
         self.hp-=damage
-        self.hp_str_var = StringVar(value=f"HP : {self.hp}/{self.max_hp}")
+        self.hp_str_var.set(f"HP : {self.hp}/{self.max_hp}")
 
     def draw(self):
         for i in range(0,5-len(self.hand)):
@@ -100,10 +100,13 @@ class Player():
     def endCardChoice(self):
         for child in self.frame.winfo_children():
             child.configure(state='disable') #turns each component off
+        
+        played_card_count = 0
         for i in range(0,5):
             match self.cards_to_play[i].get():
                 case True:
-                    self.play(card_index=i,rowsdown=i)
+                    self.play(card_index=i-played_card_count,rowsdown=i)
+                    played_card_count+=1
         self.draw()
         self.question_area.activate()
 

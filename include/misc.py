@@ -43,6 +43,7 @@ class Question_Box():
     def finalize(self):
         damage = 0
         self_damage = 0
+        self.final_answer.configure(state='disabled')
         for card in self.questions:
             if card.mc_question.chosen.get() == card.mc_question.answer:
                 damage = damage + (5 * card.difficulty)

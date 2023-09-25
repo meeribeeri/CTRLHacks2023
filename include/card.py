@@ -95,12 +95,41 @@ class ELACard(Card): #Same as social, just placing it as a diff class for organi
         self.answer = "" #Copy of correct answer, so that options can be scrambled, yes this can cause issues if they dont match... so hope that doesn't occur!
         match self.type:
             case ELAType.R_AND_J:
-                #temp only 1 option
+                self.refresh_image("include\R_and_j.png")
+                #total of 3 questions
                 self.question = "Who says, \"A curse on both your houses!\"?"
                 self.options.append("Mercutio")
                 self.options.append("Tybalt")
                 self.options.append("Romeo")
                 self.options.append("Benvolio")
+            case ELAType.MACBETH:
+                self.refresh_image("include\Macbeth.png")
+                #total of 4 options
+                match randint(1,4):
+                    case 1:
+                        self.question = "The witches say that Macbeth shall be king and ____'s children as well."
+                        self.options.append("Banquo")
+                        self.options.append("Macbeth")
+                        self.options.append("Siward")
+                        self.options.append("Ross")
+                    case 2:
+                        self.question = "Who kills Macbeth?"
+                        self.options.append("Macduff")
+                        self.options.append("Malcolm")
+                        self.options.append("Young Siward")
+                        self.options.append("Himself")
+                    case 3:
+                        self.question = "Why does Macbeth kill Duncan?"
+                        self.options.append("Ambition; to become the king")
+                        self.options.append("To protect himself")
+                        self.options.append("Hatred")
+                        self.options.append("As a gift to his wife")
+                    case 4:
+                        self.question = "Why does Macbeth react strongly when he is told that the woods began to move?"
+                        self.options.append("As he would never be killed until they moved")
+                        self.options.append("As his enemies are attacking")
+                        self.options.append("He thought they were removed")
+                        self.options.append("He was drunk")
         self.answer = self.options[0]
 
     def play(self,window : Frame,rowsdown : int):
@@ -194,7 +223,7 @@ class MathCard(Card):
                     a+=1
                 point_y = randint(-10,10)
                 self.difficulty = 2
-                self.question = f"What is the vertical stretch of g({point_y}) = af({b}({point_x}-{h}))+{k} if f(x) = x?"
+                self.question = f"What is the vertical stretch of g(x) = af({b}(x-{h}))+{k} if g({point_x}) = {point_y}?"
                 self.options.append(f"{(point_y-k)/(b*(point_x-h))}")
                 self.options.append(f"{(point_y-h)/(b*(point_x-k))}")
                 self.options.append(f"{(point_y+k)/(b*(point_x+h))}")
