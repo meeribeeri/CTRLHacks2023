@@ -11,7 +11,7 @@ class Question_Text():
     def __init__(self,question : str, frame : Frame):
         self.question = question
         self.label = Label(frame,question,anchor="center")
-
+        
 class Question_Box():
     def __init__(self,master : Tk):
         self.master = master
@@ -23,7 +23,7 @@ class Question_Box():
         self.frame['relief'] = 'sunken'
         self.frame.grid_rowconfigure(0, weight=1)
         self.frame.grid_columnconfigure(0, weight=1)
-        self.frame.grid(row=1,column=0,columnspan=6,rowspan=7,sticky=N)
+        self.frame.grid(row=1,column=1,columnspan=6,rowspan=7,sticky=N)
         self.questions = []
 
         self.title = Label(master=self.frame,text="Answer All Questions")

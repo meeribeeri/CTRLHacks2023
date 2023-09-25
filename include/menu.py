@@ -14,7 +14,7 @@ class TopBar():
         self.frame['relief'] = 'sunken'
         self.frame.grid_rowconfigure(0, weight=1)
         self.frame.grid_columnconfigure(1, weight=1)
-        self.frame.grid(row=0,column=0,columnspan=8,sticky=N)
+        self.frame.grid(row=0,column=0,columnspan=8,sticky=N+E+W)
 
         self.title = Label(master=self.frame,text="Study Card Duels")
         self.title.grid(row=0,column=1,columnspan=6,sticky=N)
@@ -40,6 +40,9 @@ class EndScreen():
 
         self.restart_button = Button(master=self.frame,text="Restart",command=self.restart)
         self.restart_button.grid(row=1,column=0,sticky=N)
+        
+        self.exit_button = Button(master=self.frame,text="Exit",command=exit)
+        self.exit_button.grid(row=2,column=0,sticky=N)
 
     def restart(self):
         for child in self.frame.winfo_children():
