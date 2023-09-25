@@ -58,7 +58,6 @@ class Question_Box():
         self.targets[self.current_target-1].damage(self_damage)
         self.targets[self.current_target-1].turnEnd()
         self.targets[self.current_target].turnStart()
-        print(len(self.targets[self.current_target].deck))
         match self.current_target:
             case 0:
                 self.retarget(1)

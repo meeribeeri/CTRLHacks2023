@@ -19,10 +19,7 @@ def main():
     Win.grid_rowconfigure(0, weight=1)
     Win.grid_columnconfigure(1, weight=1)
     while True:
-        
-
         winner = None
-        
         
         top_bar = TopBar(Win)
 
@@ -38,7 +35,7 @@ def main():
                     card = cards.MathCard(cards.MathType(randint(0,2)))
                 case 2:
                     #SS
-                    card = cards.SSCard(cards.SocialType.ENLIGHT)
+                    card = cards.SSCard(cards.SocialType(randint(1,3)))
                 case 3:
                     card = cards.ELACard(cards.ELAType(randint(0,1)))
             deck_p1.append(card)
