@@ -144,7 +144,7 @@ class SSCard(Card):
                         self.options.append("The integration of distinct minorities into society")
                     case 4:
                         self.question = "Acculturation is:"
-                        self.options.append("Change to do contact with other cultures")
+                        self.options.append("Change due to contact with other cultures")
                         self.options.append("Reflecting many diverse cultures")
                         self.options.append("The growth of towns and cities")
                         self.options.append("The global popular culture from globalization")

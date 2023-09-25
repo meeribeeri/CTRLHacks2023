@@ -5,7 +5,7 @@ from tkinter import *
 from tkinter.ttk import *
 from PIL import ImageTk, Image
 
-
+from include.menu import TopBar
 
 class Player():
     def __init__(self,question_area,player_num : int = 1,deck : list = None, window : Tk = None, hp : int = 100, max_hp : int = 100,label_column :int = 0):

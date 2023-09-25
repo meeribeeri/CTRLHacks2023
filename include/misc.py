@@ -3,9 +3,7 @@ from tkinter import ttk
 from tkinter import * 
 from tkinter.ttk import *
 
-from include.card import Card
-from include.player import Player
-
+from include.menu import TopBar
 
 class Question_Text():
     def __init__(self,question : str, frame : Frame):
@@ -17,6 +15,7 @@ class Question_Box():
         self.master = master
         self.targets = []#recievers of damage
         self.current_target = 0 #current reciever
+        self.top_bar = None
 
         self.frame = Frame(master)
         self.frame['borderwidth'] = 2
@@ -25,6 +24,7 @@ class Question_Box():
         self.frame.grid_columnconfigure(5, weight=1)
         self.frame.grid(row=1,column=1,columnspan=1,rowspan=7,sticky=N+E+W)
         self.questions = []
+        self.previous_questions = []
 
         self.title = Label(master=self.frame,text="Answer All Questions")
         self.title.grid(row=0,column=0,columnspan=6,sticky=N)
@@ -33,9 +33,12 @@ class Question_Box():
         self.final_answer.grid(row=7,column=0,columnspan=6,sticky=N)
         self.final_answer.configure(state="disable")
 
-    def addQuestion(self,question : Card,rowsdown : int = 0):
+    def addQuestion(self,question,rowsdown : int = 0):
         self.questions.append(question)
         self.questions[-1].play(self.frame,rowsdown)
+
+    def get_topbar(self,topbar : TopBar): #literally just a function to deal with the circular parameter thing I made and have to deal with
+        self.top_bar = topbar
 
     def retarget(self,new_target : int):
         self.current_target = new_target
@@ -47,12 +50,16 @@ class Question_Box():
         for card in self.questions:
             if card.mc_question.chosen.get() == card.mc_question.answer:
                 damage = damage + (5 * card.difficulty)
+                self.previous_questions.append(True)
             else:
                 self_damage = self_damage + int(2.5 * card.difficulty)
+                self.previous_questions.append(False)
+        self.top_bar.update()
         for question in self.questions:
             question.mc_question.delete()
         
         self.questions = []
+        self.previous_questions = [] #Wipe clean for next time
 
         self.targets[self.current_target].damage(damage)
         self.targets[self.current_target-1].damage(self_damage)

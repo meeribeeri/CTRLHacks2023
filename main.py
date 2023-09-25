@@ -13,18 +13,20 @@ def main():
     Win = Tk()
 
     Win.title('Card Learning Game') #self explanitory
-    Win.geometry('1000x400') #Size of the window
+    Win.geometry('1000x500') #Size of the window
     Win.resizable(False, False) #Window is not resizable
     Win.iconbitmap('') #Window Icon
     Win.grid_rowconfigure(0, weight=1)
     Win.grid_columnconfigure(1, weight=1)
     while True:
         winner = None
-        
-        top_bar = TopBar(Win)
 
         question_frame = Question_Box(Win)
         
+        top_bar = TopBar(Win,question_frame)
+
+        question_frame.get_topbar(topbar=top_bar)
+
         deck_p1 = []
         deck_p2 = []
         for i in range(0,20):
@@ -74,5 +76,5 @@ def main():
         del end
         
 
-if __name__ == "__main__":
-    main()
+
+main()
