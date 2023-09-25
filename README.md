@@ -1,5 +1,5 @@
 # CTRLHacks2023
-Meeribeeri & llnotion's submission to CTRL-Hacks 2023. (Alex Ngo & Grayson Ardron)
+Meeribeeri & llnotion's submission to CTRL-Hacks 2023. (Alex Ngo (SWC) & Grayson Ardron (Crescent Heights))
 
 Coded in Python using Tkinter
 
