@@ -1,5 +1,4 @@
 from random import randint
-from random import random
 from random import shuffle
 import tkinter as tk
 from tkinter import ttk
@@ -13,36 +12,37 @@ from math import *
 
 from enum import Enum
 
-class MathType(Enum):
+class MathType(Enum): #Math units
     QUADRATICS = 0
     TRANSFORMATIONS = 1
     PERMS_AND_COMBS = 2
 
-class SocialType(Enum):
+class SocialType(Enum): #Social units
     GLOBE = 1
     ENLIGHT = 2
     US_CIVIL = 3
 
-class ELAType(Enum):
+class ELAType(Enum): #ElA topics
     R_AND_J = 0
     MACBETH = 1
 
-class Card():
+class Card(): #Base card class for each card
     def __init__(self,image = None,text : str = ""):
+        #Image resize
         self.x_resize = 50
         self.y_resize = 100
-        if image != None:
+        if image != None: #Image setting
             self.image_ref = Image.open(image)
             self.image_ref.resize((self.x_resize,self.y_resize))
             self.image = ImageTk.PhotoImage(self.image_ref)
         else:
             self.image = image
-        self.text = text
-        self.difficulty = 0
+        self.text = text #displayed text above card
+        self.difficulty = 0 #Difficulty of the question
 
-    def play(self):
+    def play(self): #To be overrided
         pass
-    def refresh_image(self,image):
+    def refresh_image(self,image): #set a new image
         if image != None:
             self.image_ref = Image.open(image)
             self.image_ref.resize((self.x_resize,self.y_resize))
@@ -50,18 +50,18 @@ class Card():
         else:
             self.image = image
 
-class SSCard(Card):
+class SSCard(Card): #Social studies card
     def __init__(self,cardtype : SocialType):
         super().__init__(text="Social")
-        self.type = cardtype
+        self.type = cardtype #Social unit covered
         self.difficulty = 1 #difficulty of the question
         self.question = "" #question asked
         self.options = [] #all possible options(4 total)
         self.answer = "" #Copy of correct answer, so that options can be scrambled, yes this can cause issues if they dont match... so hope that doesn't occur!
         match self.type:
-            case SocialType.ENLIGHT:
+            case SocialType.ENLIGHT: #Enlightenment questions
                 self.refresh_image("include\Enlightenment.png")
-                all_people = ["Adam Smith","Voltaire","Thomas Hobbes","Mary Wollstonecraft","Jean Jacques Rousseau","John Locke","Baron Montesquieu"]
+                all_people = ["Adam Smith","Voltaire","Thomas Hobbes","Mary Wollstonecraft","Jean Jacques Rousseau","John Locke","Baron Montesquieu"] #All possible people
                 match randint(1,8):
                     case 1:
                         self.question = "Who wrote \"The Wealth of Nations\"?"
@@ -88,13 +88,13 @@ class SSCard(Card):
                         self.question = "Who presented the idea of the separation of powers in government?"
                         self.options.append(all_people[6])
 
-                while len(self.options) < 4:
+                while len(self.options) < 4: #Fill the incorrect answers with random people
                     random_person = randint(0,6)
                     if self.options[0] == all_people[random_person]:
                         continue
                     else:
                         self.options.append(all_people[random_person])
-            case SocialType.US_CIVIL:
+            case SocialType.US_CIVIL: #US civil war Q's
                 self.refresh_image("include\\US.png")
                 match randint(1,4):
                     case 1:
@@ -121,7 +121,7 @@ class SSCard(Card):
                         self.options.append("The colonists")
                         self.options.append("France")
                         self.options.append("Nobody")
-            case SocialType.GLOBE:
+            case SocialType.GLOBE: #Globalization Q's
                 self.refresh_image("include\Globe.png")
                 match randint(1,4):
                     case 1:
@@ -152,7 +152,7 @@ class SSCard(Card):
                     
         self.answer = self.options[0] #always put first option as correct, they are scambled anyway
 
-    def play(self,window : Frame,rowsdown : int):
+    def play(self,window : Frame,rowsdown : int): #Play the card
         shuffle(self.options)
         self.mc_question = mc.multiple_choice(self.options,self.options.index(self.answer),self.question,window,rowsdown=rowsdown)
 
@@ -165,7 +165,7 @@ class ELACard(Card): #Same as social, just placing it as a diff class for organi
         self.options = [] #all possible options(4 total)
         self.answer = "" #Copy of correct answer, so that options can be scrambled, yes this can cause issues if they dont match... so hope that doesn't occur!
         match self.type:
-            case ELAType.R_AND_J:
+            case ELAType.R_AND_J: #Romeo and Juliet
                 self.refresh_image("include\R_and_j.png")
                 #total of 3 questions
                 match randint(1,3):
@@ -187,7 +187,7 @@ class ELACard(Card): #Same as social, just placing it as a diff class for organi
                         self.options.append("He owed Romeo a favour")
                         self.options.append("He liked Juliet")
                         self.options.append("He was bribed")
-            case ELAType.MACBETH:
+            case ELAType.MACBETH: #Macbeth... I hated typing these - Alex
                 self.refresh_image("include\Macbeth.png")
                 #total of 4 options
                 match randint(1,4):
@@ -217,22 +217,22 @@ class ELACard(Card): #Same as social, just placing it as a diff class for organi
                         self.options.append("He was drunk")
         self.answer = self.options[0]
 
-    def play(self,window : Frame,rowsdown : int):
+    def play(self,window : Frame,rowsdown : int): #Play card
         shuffle(self.options)
         self.mc_question = mc.multiple_choice(self.options,self.options.index(self.answer),self.question,master=window,rowsdown=rowsdown)
 
 
-class MathCard(Card):
+class MathCard(Card): #THE LOGIC FOR THIS WAS SO PAINFUL AAAAHHHH
     def __init__(self,cardtype : MathType):
         super().__init__(text="Math")
-        self.type = cardtype
+        self.type = cardtype #Same as the other cards
         self.question = ""
         self.options = []
         self.answer = ""
         self.difficulty = 1
-        #range/domain of the randints are completely arbitrary
+        #!!!range/domain of the randints are completely arbitrary!!!
         match self.type:
-            case MathType.QUADRATICS:
+            case MathType.QUADRATICS: #Quadratics question
                 #base equation is either y = a(x-h)+k or y = ax^2 + bx + c
                 self.refresh_image("include/Quadratics.png")
                 match randint(1,2):
@@ -253,7 +253,7 @@ class MathCard(Card):
                             str_k = f"+{k}"
                         else:
                             str_k = f"-{k*-1}"
-                        match randint(1,3):
+                        match randint(1,3): #Note to self: A great way to study is to try and create questions for them, and the possible answers... Pain
                             case 1:
                                 self.difficulty = 2
                                 #get y intercept
@@ -287,7 +287,7 @@ class MathCard(Card):
                         self.options.append(f"{-c}")
                         self.options.append(f"{a}")
                         self.options.append(f"{b}")
-            case MathType.TRANSFORMATIONS:
+            case MathType.TRANSFORMATIONS: #Transformations
                 self.refresh_image("include\Transformations.png")
                 #Find transformation in stretch, I can only be bothered to do stretch
                 a = randint(-5,5)
@@ -313,7 +313,7 @@ class MathCard(Card):
                 self.options.append(f"{(point_y-h)/(b*(point_x-k))}")
                 self.options.append(f"{(point_y+k)/(b*(point_x+h))}")
                 self.options.append(f"{(point_y-k)/(a*(point_x-h))}")
-            case MathType.PERMS_AND_COMBS:
+            case MathType.PERMS_AND_COMBS: #Permutations and Combinations. Significantly easier than the others due to built in math functions!
                 self.refresh_image("include\Perms_And_Combs.png")
                 #perm of a word, picking something, find perm k value, find comb k value
                 n = randint(3,9)
@@ -349,6 +349,6 @@ class MathCard(Card):
 
         self.answer = self.options[0]
 
-    def play(self,window : Frame,rowsdown : int):
+    def play(self,window : Frame,rowsdown : int): #Play card
         shuffle(self.options)
         self.mc_question = mc.multiple_choice(self.options,self.options.index(self.answer),self.question,master=window,rowsdown=rowsdown)
