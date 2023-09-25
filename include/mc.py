@@ -14,7 +14,8 @@ class multiple_choice():
         self.frame['borderwidth'] = 2
         self.frame['relief'] = 'sunken'
         self.frame.grid_rowconfigure(0, weight=1)
-        self.frame.grid_columnconfigure(0, weight=1)
+        self.frame.grid_columnconfigure(1, weight=1)
+        self.frame.grid_columnconfigure(2, weight=1)
 
         self.choices = choices
         self.answer = answer
@@ -29,8 +30,8 @@ class multiple_choice():
         #Button to make answer final
 
         #place everything in the right position
-        self.frame.grid(row=0+rowsdown,column=0,sticky=N)
-        self.question_label.grid(row=0,column=0,columnspan=4,sticky=N)
+        self.frame.grid(row=0+rowsdown,column=0,columnspan=7,sticky=N+E+W)
+        self.question_label.grid(row=0,column=0,columnspan=4)
         self.m1.grid(row=1,column=0,rowspan=1,columnspan=1,padx=2)
         self.m2.grid(row=1,column=1,rowspan=1,columnspan=1,padx=2)
         self.m3.grid(row=1,column=2,rowspan=1,columnspan=1,padx=2)

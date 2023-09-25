@@ -31,7 +31,7 @@ class Card():
     def __init__(self,image = None,text : str = ""):
         if image != None:
             self.image_ref = Image.open(image)
-            self.image_ref.resize((25,50),Image.ANTIALIAS)
+            self.image_ref.resize((25,50))
             self.image = ImageTk.PhotoImage(self.image_ref)
         else:
             self.image = image
@@ -40,6 +40,13 @@ class Card():
 
     def play(self):
         pass
+    def refresh_image(self,image):
+        if image != None:
+            self.image_ref = Image.open(image)
+            self.image_ref.resize((25,50))
+            self.image = ImageTk.PhotoImage(self.image_ref)
+        else:
+            self.image = image
 
 class SSCard(Card):
     def __init__(self,cardtype : SocialType):
@@ -113,6 +120,7 @@ class MathCard(Card):
         match self.type:
             case MathType.QUADRATICS:
                 #base equation is either y = a(x-h)+k or y = ax^2 + bx + c
+                self.refresh_image("include/Quadratics.png")
                 match randint(1,2):
                     case 1:
                         if randint(0,1) == 1:
@@ -144,10 +152,10 @@ class MathCard(Card):
                                 self.difficulty = 3
                                 #x ints
                                 self.question = f"What are the x-intercepts of y = {a}((x{str_h})^2){str_k}?"
-                                self.options.append(f"+/-{sqrt(abs((0-k)/a))}+{h}")
-                                self.options.append(f"+/-{sqrt(abs((0-h)/a))}+{k}")
-                                self.options.append(f"+/-{sqrt(abs((0-k)/-a))}+{h}")
-                                self.options.append(f"+/-{sqrt(abs((0+k)/a))}+{-h}")
+                                self.options.append(f"{h}+/-{sqrt(abs((0-k)/a))}")
+                                self.options.append(f"{k}+/-{sqrt(abs((0-h)/a))}")
+                                self.options.append(f"{h}+/-{sqrt(abs((0-k)/-a))}")
+                                self.options.append(f"{-h}+/-{sqrt(abs((0+k)/a))}")
                             case 3:
                                 #vertex
                                 self.question = f"What is the vertex of y = {a}((x{str_h})^2){str_k}?"
@@ -166,6 +174,7 @@ class MathCard(Card):
                         self.options.append(f"{a}")
                         self.options.append(f"{b}")
             case MathType.TRANSFORMATIONS:
+                self.refresh_image("include\Transformations.png")
                 #Find transformation in stretch, I can only be bothered to do stretch
                 a = randint(-5,5)
                 b = randint(-5,5)
@@ -191,6 +200,7 @@ class MathCard(Card):
                 self.options.append(f"{(point_y+k)/(b*(point_x+h))}")
                 self.options.append(f"{(point_y-k)/(a*(point_x-h))}")
             case MathType.PERMS_AND_COMBS:
+                self.refresh_image("include\Perms_And_Combs.png")
                 #perm of a word, picking something, find perm k value, find comb k value
                 n = randint(3,9)
                 k = randint(3,n)

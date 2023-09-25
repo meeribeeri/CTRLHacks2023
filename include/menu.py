@@ -32,7 +32,7 @@ class EndScreen():
         self.frame['relief'] = 'sunken'
         self.frame.grid_rowconfigure(0, weight=1)
         self.frame.grid_columnconfigure(0, weight=1)
-        self.frame.grid(row=0,column=0,columnspan=6,rowspan=6,sticky=N)
+        self.frame.grid(row=0,column=0,columnspan=6,rowspan=2,sticky=N+E+W)
         self.text = f"Player {winner} wins!"
 
         self.end_text = Label(master=self.frame,text=self.text)

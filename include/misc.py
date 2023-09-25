@@ -22,8 +22,8 @@ class Question_Box():
         self.frame['borderwidth'] = 2
         self.frame['relief'] = 'sunken'
         self.frame.grid_rowconfigure(0, weight=1)
-        self.frame.grid_columnconfigure(0, weight=1)
-        self.frame.grid(row=1,column=1,columnspan=6,rowspan=7,sticky=N)
+        self.frame.grid_columnconfigure(5, weight=1)
+        self.frame.grid(row=1,column=1,columnspan=1,rowspan=7,sticky=N+E+W)
         self.questions = []
 
         self.title = Label(master=self.frame,text="Answer All Questions")

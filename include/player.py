@@ -90,7 +90,7 @@ class Player():
 
     def turnStart(self):
         self.activate()
-        self.frame.grid(column=0,row=9,columnspan=6,rowspan=3,sticky=N)
+        self.frame.grid(column=0,row=11,columnspan=6,rowspan=3,sticky=N)
         for child in self.frame.winfo_children():
             child.configure(state='normal') #turns each component of frame on, so that users can see it
 

@@ -54,22 +54,26 @@ def main():
     #anything below here won't run, at least within the function
         if Player_1.hp <= 0:
             winner = 2
+            Player_2.side_frame.grid(row=1,column=0,sticky=N+E+W)
+            Player_1.side_frame.destroy()
         else:
             winner = 1
+            Player_1.side_frame.grid(row=1,column=0,sticky=N+E+W)
+            Player_2.side_frame.destroy()
+
         Player_1.delete()
         Player_2.delete()
         question_frame.delete()
         top_bar.delete()
-        #deleting objs, probs unecessary
-        del Player_1
-        del Player_2
-        del question_frame
-        del top_bar
 
         end = EndScreen(master=Win,winner=winner)
 
         Win.mainloop()
         end.delete()
+        if winner == 1:
+            Player_1.side_frame.destroy()
+        else:
+            Player_2.side_frame.destroy()
         del end
         
 
